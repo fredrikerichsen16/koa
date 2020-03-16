@@ -1,40 +1,69 @@
+<script>
+
+import SearchMenu from './SearchMenu';
+
+export default {
+    components: {
+        SearchMenu
+    },
+
+    name: 'SearchBar',
+
+    data() {
+        return {
+            searchEngine: 'Google',
+            query: '',
+            showMenu: false,
+        };
+    },
+
+    computed: {
+        /**
+         * Get placeholder attribute for input, depending on user's preferred search engine
+         */
+        placeholder() {
+            return 'Search ' + this.searchEngine + '...';
+        },
+
+        /**
+         * Get action attribute for form, depending on user's preferred search engine
+         */
+        action() {
+            if(this.searchEngine === 'Google') {
+                return "https://www.google.com/search";
+            }
+        }
+    },
+
+    methods: {
+        search() {
+            if(this.query === '') {
+                this.showMenu = false;
+            } else {
+                this.showMenu = true;
+            }
+        }
+    },
+}
+
+</script>
+
 <template>
     <form id="search"
           method="GET"
           v-bind:action="action">
         <input type="text"
                name="q"
+               autofocus="autofocus"
                v-bind:placeholder="placeholder"
-               autofocus="autofocus">
+               v-model.trim="query"
+               v-debounce:200="search">
+
+        <SearchMenu v-show="showMenu" :query="query" />
     </form>
 </template>
 
-<script>
-    export default {
-        name: 'SearchBar',
-        data() {
-            return {
-                searchEngine: 'Google'
-            };
-        },
-        computed: {
-            placeholder() {
-                return 'Search ' + this.searchEngine + '...';
-            },
-
-            /**
-             *
-             */
-            action() {
-                if(this.searchEngine === 'Google') {
-                    return "https://www.google.com/search";
-                }
-            }
-        }
-    }
-</script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 
 div#content form#search {
     width: 400px;

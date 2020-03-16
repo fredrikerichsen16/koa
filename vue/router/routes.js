@@ -14,7 +14,9 @@ _widgets.map((widget) => {
     widget.component = () => import(`../widgets/${widget.name}/${widget.name}`);
     widget.meta = widget.options;
     widget.meta.name = widget.title;
+    widget.meta.slug = widget.slug;
 
+    delete widget.slug;
     delete widget.options;
     delete widget.title;
 
