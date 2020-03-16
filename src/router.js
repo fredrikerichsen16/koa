@@ -1,34 +1,12 @@
 const KoaRouter = require('koa-router');
 const router = new KoaRouter();
+const setCookies = require('./services/setCookiesService');
 
 module.exports = function(app) {
     app.use(router.routes()).use(router.allowedMethods());
 
     router.get('/', async (ctx) => {
-        let user = ctx.cookies.get('user');
-
-        if (!user) {
-            user = {
-                id: 1,
-                personal: {
-                    name: 'Fredrik',
-                    city: {
-                        name: 'Stavanger, Norway',
-                        timezone: 'UTC+1',
-                    },
-                },
-                preferences: {
-                    clockFormat: '12HR',
-                    language: 'EN',
-                },
-                widgets: ['news-digest', 'todo', 'stocks']
-            };
-
-            ctx.cookies.set('user', user);
-        }
-
-        console.log(ctx.cookies.get('user'));
-
+        ctx = setCookies(ctx);
         await ctx.render('index.html');
     });
 
