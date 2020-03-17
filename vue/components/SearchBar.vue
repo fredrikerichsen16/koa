@@ -1,10 +1,10 @@
 <script>
 
-import SearchMenu from './SearchMenu';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
     components: {
-        SearchMenu
+        SearchMenu: () => import('./SearchMenu')
     },
 
     name: 'SearchBar',
@@ -12,6 +12,7 @@ export default {
     data() {
         return {
             searchEngine: 'Google',
+            queryInput: '',
             query: '',
             showMenu: false,
         };
@@ -32,15 +33,58 @@ export default {
             if(this.searchEngine === 'Google') {
                 return "https://www.google.com/search";
             }
-        }
+        },
+
+        ...mapState(['magicSearchPosition'])
     },
 
     methods: {
+        ...mapMutations(['CHANGE_MAGIC_SEARCH_POSITION']),
+
         search() {
-            if(this.query === '') {
+            this.query = this.queryInput;
+
+            if(this.queryInput === '') {
                 this.showMenu = false;
             } else {
                 this.showMenu = true;
+            }
+        },
+
+        selectDown() {
+            this.CHANGE_MAGIC_SEARCH_POSITION(this.magicSearchPosition + 1);
+        },
+
+        selectUp(e) {
+            if (this.magicSearchPosition < 1) return;
+            this.CHANGE_MAGIC_SEARCH_POSITION(this.magicSearchPosition - 1);
+            e.preventDefault();
+        },
+
+        focusInput() {
+            this.CHANGE_MAGIC_SEARCH_POSITION(0);
+
+            if(this.query !== '') {
+                this.showMenu = true;
+            }
+        },
+
+        blurInput() {
+            this.showMenu = false;
+            this.CHANGE_MAGIC_SEARCH_POSITION(0);
+        },
+
+        onFormSubmit(e) {
+            if(this.magicSearchPosition != 0) {
+                e.preventDefault();
+            }
+
+            if(this.magicSearchPosition == 2) {
+                location.href = 'https://www.google.com';
+            }
+
+            if(this.magicSearchPosition == 3) {
+                location.href = 'https://www.google.com/maps';
             }
         }
     },
@@ -51,15 +95,23 @@ export default {
 <template>
     <form id="search"
           method="GET"
-          v-bind:action="action">
+          v-bind:action="action"
+          @submit="onFormSubmit($event)">
         <input type="text"
+               id="magic_search_input"
                name="q"
                autofocus="autofocus"
                v-bind:placeholder="placeholder"
-               v-model.trim="query"
-               v-debounce:200="search">
+               v-model.trim="queryInput"
+               v-debounce:500="search"
+               @focus="focusInput"
+               @blur="blurInput"
+               v-on:keyup.down="selectDown"
+               v-on:keydown.up="selectUp($event)">
 
-        <SearchMenu v-show="showMenu" :query="query" />
+        <transition name="toggle-menu">
+            <SearchMenu v-show="showMenu" :query="query" />
+        </transition>
     </form>
 </template>
 

@@ -43,6 +43,7 @@ export default {
 </template>
 
 <style lang="scss">
+
 div#background {
     position: absolute;
     top: 40px;
@@ -67,4 +68,5 @@ div#outside {
     position: absolute;
     z-index: 0;
 }
+
 </style>
