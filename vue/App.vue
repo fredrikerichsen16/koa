@@ -1,11 +1,11 @@
 <script>
 
-import Loader from './components/Loader';
-import SearchBar from './components/SearchBar';
-import Quote from './components/Quote';
-import Clock from './components/Clock';
-import WidgetLinks from './components/WidgetLinks';
-import Sidebar from './widgets/Sidebar';
+import Loader from '@/components/Loader';
+import SearchBar from '@/components/SearchBar';
+import Quote from '@/components/Quote';
+import Clock from '@/components/Clock';
+import WidgetLinks from '@/components/WidgetLinks';
+import Sidebar from '@/widgets/Sidebar';
 
 export default {
     name: 'App',

@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
     components: {
-        SearchMenu: () => import('./SearchMenu')
+        SearchMenu: () => import('./SearchMenu.vue')
     },
 
     name: 'SearchBar',
@@ -15,6 +15,7 @@ export default {
             queryInput: '',
             query: '',
             showMenu: false,
+            showMenuFirstTime: false,
         };
     },
 
@@ -48,6 +49,7 @@ export default {
                 this.showMenu = false;
             } else {
                 this.showMenu = true;
+                this.showMenuFirstTime = true;
             }
         },
 
@@ -110,7 +112,9 @@ export default {
                v-on:keydown.up="selectUp($event)">
 
         <transition name="toggle-menu">
-            <SearchMenu v-show="showMenu" :query="query" />
+            <SearchMenu v-if="showMenuFirstTime"
+                        v-show="showMenu"
+                        :query="query" />
         </transition>
     </form>
 </template>

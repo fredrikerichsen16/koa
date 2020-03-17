@@ -2,8 +2,8 @@ var path = require('path')
 var webpack = require('webpack')
 
 var MODE = 'development';
-var VUE_SRC = path.resolve(__dirname, 'vue');
-var VUE_DIST = path.resolve(__dirname, 'static/vue-dist');
+var VUE_SRC = path.resolve(__dirname, './vue');
+var VUE_DIST = path.resolve(__dirname, './static/vue-dist');
 
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -14,7 +14,9 @@ module.exports = {
     },
     output: {
         path: VUE_DIST,
-        filename: '[name].js'
+        publicPath: '/vue-dist/',
+        filename: '[name].js',
+        chunkFilename: '[id].chunk.js',
     },
     module: {
         rules: [
@@ -23,41 +25,25 @@ module.exports = {
                 loader: 'babel-loader',
                 include: VUE_SRC,
                 exclude: '/node_modules/',
-                query: {
+                options: {
                     presets: [
-                        '@babel/preset-env',
-                        // '@babel/preset-es2015'
+                        ['@babel/preset-env', {
+                            'modules': false,
+                        }],
                     ],
                     plugins: [
                         // dynamic importing vue routes (lazy load)
                         '@babel/plugin-syntax-dynamic-import',
                         ['@babel/plugin-transform-runtime', {
                             'regenerator': true
-                        }]
-                    ]
+                        }],
+                    ],
                 }
             },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: {
-                    // loaders: {
-                    //     // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-                    //     // the "scss" and "sass" values for the lang attribute to the right configs here.
-                    //     // other preprocessors should work out of the box, no loader config like this necessary.
-                    //     'scss': [
-                    //         'vue-style-loader',
-                    //         'css-loader',
-                    //         'sass-loader',
-                    //     ],
-                    //     'sass': [
-                    //         'vue-style-loader',
-                    //         'css-loader',
-                    //         'sass-loader?indentedSyntax',
-                    //     ]
-                    // }
-                    // other vue-loader options go here
-                }
+                options: {}
             },
             {
                 test: /\.css$/,
@@ -75,7 +61,7 @@ module.exports = {
                 ],
             },
             {
-            test: /\.sass$/,
+                test: /\.sass$/,
                 use: [
                     'vue-style-loader',
                     'css-loader',
@@ -90,7 +76,8 @@ module.exports = {
 
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': path.resolve('vue'),
         },
         extensions: ['.js', '.vue', '.json']
     },
