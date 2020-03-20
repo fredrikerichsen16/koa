@@ -1,7 +1,7 @@
 <script>
 
 import Loader from '@/components/Loader';
-import SearchBar from '@/components/SearchBar';
+import MiddleComponent from '@/components/MiddleComponent';
 import Quote from '@/components/Quote';
 import Clock from '@/components/Clock';
 import WidgetLinks from '@/components/WidgetLinks';
@@ -14,7 +14,7 @@ export default {
     },
     components: {
         Loader,
-        SearchBar,
+        MiddleComponent,
         Quote,
         Clock,
         Sidebar,
@@ -31,7 +31,7 @@ export default {
 
         <div id="background">
             <div id="content">
-                <SearchBar />
+                <MiddleComponent />
             </div>
         </div>
         <div id="outside">
@@ -51,8 +51,6 @@ div#background {
     height: calc(100% - 120px);
     width: calc(100% - 120px);
     z-index: 1;
-
-    background-image: url("/img/bg/cali.jpg");
     background-size: cover;
 
     div#content {

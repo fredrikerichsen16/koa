@@ -123,10 +123,6 @@ export default {
 
 div#content form#search {
     width: 400px;
-    position: absolute;
-    left: calc(50% - 200px);
-    top: 50%;
-    transform: translateY(-50%);
 
     $inputBackground: rgba(87, 109, 127, 0.47);
     $inputBoxShadow: rgba(48, 60, 70, 0.8);

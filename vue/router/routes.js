@@ -23,4 +23,4 @@ _widgets.map((widget) => {
     return widget;
 });
 
-module.exports = _widgets;
+export default _widgets;

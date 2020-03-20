@@ -108,8 +108,9 @@ div#menu {
     background: white;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 2px 1px 1px rgba(102, 102, 102, 0.4);
     position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.6);
 
     ul li {
         padding: 6px 10px;
