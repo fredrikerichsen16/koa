@@ -7,6 +7,9 @@ const favicon = require('koa-favicon');
 
 const app = new koa();
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 app.use(views(path.join(__dirname, '../views'), { extension: 'html' }));
 app.use(static(path.join(__dirname, '../static')));
 app.use(favicon(path.join(__dirname, '/favicon.ico')));
@@ -23,6 +26,6 @@ app.use(async (ctx, next) => {
    return await next();
 });
 
-app.listen(3000, ctx => {
+app.listen(process.env.PORT, ctx => {
    console.log('Server started on port 3000');
 });

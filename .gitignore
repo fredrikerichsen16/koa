@@ -44,5 +44,8 @@ node_modules/
 .env
 .env.test
 
+# .idea WebStorm
+.idea/
+
 # vuepress build output
 .vuepress/dist
