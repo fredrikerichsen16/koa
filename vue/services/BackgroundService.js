@@ -7,6 +7,10 @@ class BackgroundService {
         this.now = this.date.getTime();
     }
 
+    get nextShuffleTime() {
+        return 1; // this.now + (1000 * 60 * 2);
+    }
+
     /**
      * Retrieve background image and potentially metadata
      *
@@ -27,7 +31,7 @@ class BackgroundService {
                     .then((data) => {
                         user.backgrounds = {
                             nextRefresh: this.now + (1000 * 60 * 60 * 24), // refresh all saved images with a new API call
-                            nextShuffle: 1, // this.now + (1000 * 60 * 2), // update picture every two minutes
+                            nextShuffle: this.nextShuffleTime,
                             images: data,
                             id: 0,
                             active: data[0],
@@ -66,7 +70,6 @@ class BackgroundService {
                 {
                     if (this.status == 200)
                     {
-                        console.log(this);
                         resolve(JSON.parse(this.responseText));
                     } else
                     {
@@ -81,7 +84,12 @@ class BackgroundService {
                     }
                 }
             };
-            xhttp.open('GET', 'http://localhost:3000/api/get-background', true);
+            xhttp.open('GET', 'http://localhost:3001/get-background', true);
+
+            xhttp.withCredentials = true;
+            xhttp.setRequestHeader( 'Access-Control-Allow-Credentials', true);
+            xhttp.setRequestHeader( 'Content-Type', 'application/json' );
+
             xhttp.send();
         });
     }
@@ -92,8 +100,7 @@ class BackgroundService {
         if(b.nextShuffle < this.now) {
             b.id++;
             b.active = b.images[b.id];
-            b.nextShuffle = 1;
-            // b.nextShuffle = this.now + (1000 * 60 * 2); - load a new pic every time during development.
+            b.nextShuffle = this.nextShuffleTime; // - load a new pic every time during development.
         }
 
         Cookies.set('user', this.user);

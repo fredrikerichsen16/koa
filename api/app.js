@@ -1,19 +1,17 @@
 const path = require('path');
 const koa = require('koa');
-const views = require('koa-views');
-const static = require('koa-static');
 const favicon = require('koa-favicon');
 const dotenv = require('dotenv');
+const cors = require('@koa/cors');
 const app = new koa();
 
 dotenv.config();
 
-app.use(views(path.join(__dirname, '../views'), { extension: 'html' }));
-app.use(static(path.join(__dirname, '../static')));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(favicon(path.join(__dirname, '/favicon.ico')));
 
 let router = require('./router')(app);
 
 app.listen(process.env.PORT, ctx => {
-   console.log('Server started on port 3000');
+   console.log('Server started on port ' + process.env.PORT);
 });
