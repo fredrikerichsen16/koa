@@ -6,7 +6,6 @@
             return {}
         },
     };
-
 </script>
 
 <template>
@@ -16,7 +15,10 @@
       v-for="(route, idx) in $router.options.routes"
       :key="idx"
       :to="route.path">
-        <img :src="'img/icons/' + route.meta.icon" :alt="route.meta.name + 'Icon'">
+        <img :src="'img/icons/' + route.meta.icon"
+             :alt="route.meta.name + 'Icon'"
+             data-wenk="News Digest"
+             data-wenk-pos="right">
     </router-link>
 </div>
 
@@ -26,8 +28,9 @@
 
 div#widget_links {
     position: absolute;
-    bottom: 11px;
-    left: 500px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25px;
 }
 
 a img {
@@ -35,8 +38,8 @@ a img {
     width: 55px;
     max-height: 55px;
     max-width: 55px;
-    margin-left: 55px;
-    display: inline-block;
+    margin-bottom: 20px;
+    display: block;
 }
 
 </style>

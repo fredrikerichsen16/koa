@@ -128,7 +128,7 @@ div#menu {
         }
 
         p {
-            font-family: Arial;
+            font-family: Roboto, Arial;
             font-size: 18px;
             color: rgb(114, 119, 140);
             transform: translateY(-2px);

@@ -25,19 +25,14 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div id="background">
         <Loader />
         <Sidebar />
 
-        <div id="background">
-            <div id="content">
-                <MiddleComponent />
-            </div>
-        </div>
-        <div id="outside">
-            <Clock />
-            <Quote />
+        <div id="content">
+            <MiddleComponent />
             <WidgetLinks />
+            <Quote />
         </div>
     </div>
 </template>
@@ -46,10 +41,8 @@ export default {
 
 div#background {
     position: absolute;
-    top: 40px;
-    left: 85px;
-    height: calc(100% - 120px);
-    width: calc(100% - 120px);
+    height: 100%;
+    width: 100%;
     z-index: 1;
     background-size: cover;
 
@@ -58,13 +51,6 @@ div#background {
         height: 100%;
         width: 100%;
     }
-}
-
-div#outside {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 0;
 }
 
 </style>

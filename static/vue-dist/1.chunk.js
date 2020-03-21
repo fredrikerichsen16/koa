@@ -8,7 +8,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'Stocks'\n});\n\n//# sourceURL=webpack:///./vue/widgets/Stocks/Stocks.vue?./node_modules/babel-loader/lib??ref--0!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'Stocks',\n  mounted: function mounted() {\n    var data = null;\n    var xhr = new XMLHttpRequest();\n    xhr.withCredentials = true;\n    xhr.addEventListener(\"readystatechange\", function () {\n      if (this.readyState === this.DONE) {\n        var stock = JSON.parse(this.responseText);\n        console.log(stock['01. symbol']);\n      }\n    });\n    xhr.open(\"GET\", \"https://alpha-vantage.p.rapidapi.com/query?symbol=TSLA&function=GLOBAL_QUOTE\");\n    xhr.setRequestHeader(\"x-rapidapi-host\", \"alpha-vantage.p.rapidapi.com\");\n    xhr.setRequestHeader(\"x-rapidapi-key\", \"301b5eb2fcmshebd8323fc79a828p1d45adjsn3a594e967584\");\n    xhr.send(data);\n  }\n});\n\n//# sourceURL=webpack:///./vue/widgets/Stocks/Stocks.vue?./node_modules/babel-loader/lib??ref--0!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 

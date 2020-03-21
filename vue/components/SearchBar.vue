@@ -111,7 +111,7 @@ export default {
                v-on:keyup.down="selectDown"
                v-on:keydown.up="selectUp($event)">
 
-        <transition name="toggle-menu">
+        <transition name="toggle-menu" mode="out-in">
             <SearchMenu v-if="showMenuFirstTime"
                         v-show="showMenu"
                         :query="query" />
@@ -137,12 +137,13 @@ div#content form#search {
         color: $inputTextColor;
         padding: 15px 20px;
         font-size: 20px;
-        font-family: Arial;
+        font-family: Roboto, Arial;
         border: none;
         outline: none;
 
         &::placeholder {
             color: $inputPlaceholderColor;
+            font-family: Roboto, Arial;
         }
     }
 }
