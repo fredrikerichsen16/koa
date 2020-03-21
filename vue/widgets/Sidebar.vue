@@ -1,7 +1,5 @@
 <script>
 
-import CloseWidget from './CloseWidget';
-
 export default {
     name: 'Sidebar',
 
@@ -15,10 +13,6 @@ export default {
         closeWidget() {
             this.$router.push('/');
         }
-    },
-
-    components: {
-        CloseWidget
     }
 }
 

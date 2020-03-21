@@ -81,7 +81,7 @@ class BackgroundService {
                     }
                 }
             };
-            xhttp.open('GET', 'http://localhost:3000/get-background', true);
+            xhttp.open('GET', 'http://localhost:3000/api/get-background', true);
             xhttp.send();
         });
     }
