@@ -1,6 +1,6 @@
 let $user = Cookies.get('user');
 
-if (!$user || false) {
+if (!$user) {
     $user = {
         id: 1,
         personal: {

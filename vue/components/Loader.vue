@@ -20,8 +20,6 @@
         },
 
         mounted() {
-            this.$store.commit('SET_USER');
-
             /**
              * TODO: Pass 'document' into .retrieve and do the bg.onload etc. inside the service.
              */
