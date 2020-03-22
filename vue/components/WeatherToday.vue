@@ -7,9 +7,7 @@
 <template>
     <div id="weather_today">
         <h1>Weather</h1>
-        <span
-                data-wenk="News Digest"
-                data-wenk-pos="right">24 degrees today bro!</span>
+        <span>24 degrees today bro!</span>
     </div>
 </template>
 
