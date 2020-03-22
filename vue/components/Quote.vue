@@ -1,5 +1,8 @@
 <template>
-    <div id="quote">{{ quote }}</div>
+    <div>
+        <p class="quote">{{ quote }}</p>
+        <p class="author">{{ author }}</p>
+    </div>
 </template>
 
 <script>
@@ -24,23 +27,58 @@
 
             return {
                 quote: '"' + quote[randIndex][0] + '"',
-                author: quote[randIndex][1] || undefined
+                author: quote[randIndex][1] || 'Unknown'
             };
         }
     }
 </script>
 
-<style lang="scss">
-div#quote {
+<style lang="scss" scoped>
+
+div {
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
 
-    font-size: 18px;
-    font-family: Roboto, Arial, "Times New Roman";
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: lighter;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    p {
+        font-family: Roboto, Arial, "Times New Roman";
+        text-align: center;
+    }
+
+    p.quote {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: lighter;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+
+        transform: translateY(5px);
+        transition: .3s transform ease;
+    }
+
+    p.author {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: lighter;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+
+        transform: translateY(-7px);
+        opacity: 0;
+        transition: .3s transform ease, .3s opacity ease;
+    }
+
+    div:hover {
+        cursor: pointer;
+
+        > p.author {
+            transform: translateY(5px);
+            opacity: 1;
+        }
+
+        > p.quote {
+            transform: translateY(0px);
+        }
+    }
 }
+
 </style>
